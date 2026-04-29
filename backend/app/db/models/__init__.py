@@ -1,5 +1,17 @@
-"""Import SQLModel table classes here so Alembic sees metadata."""
+"""Import all SQLModel table classes for Alembic metadata."""
 
 from sqlmodel import SQLModel
 
-__all__ = ["SQLModel"]
+from app.db.models.kb_article import ArticleStatus, KBArticle
+from app.db.models.kb_article_feedback import KBArticleFeedback
+from app.db.models.ticket_category import TicketCategory
+from app.db.models.user import User
+
+__all__ = [
+    "SQLModel",
+    "ArticleStatus",
+    "KBArticle",
+    "KBArticleFeedback",
+    "TicketCategory",
+    "User",
+]

@@ -1,0 +1,14 @@
+from collections.abc import AsyncIterator
+from typing import Annotated
+
+from fastapi import Depends, Request
+from sqlmodel.ext.asyncio.session import AsyncSession
+
+
+async def get_session(request: Request) -> AsyncIterator[AsyncSession]:
+    factory: async_sessionmaker[AsyncSession] = request.app.state.session_factory
+    async with factory() as session:
+        yield session
+
+
+SessionDep = Annotated[AsyncSession, Depends(get_session)]

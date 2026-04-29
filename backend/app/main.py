@@ -6,6 +6,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from redis.asyncio import Redis
 from slowapi.middleware import SlowAPIMiddleware
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.api.errors import register_exception_handlers
 from app.api.router import api_router
@@ -15,7 +17,7 @@ from app.integrations.secrets import load_integration_api_keys
 from app.integrations.service_bus import ServiceBusPublisher
 from app.limiter import limiter
 from app.middleware.request_id import RequestIdMiddleware
-from app.websocket.routes import ws_router
+from app.websocket.routes import router as ws_router
 
 logger = structlog.get_logger(__name__)
 
@@ -23,6 +25,16 @@ logger = structlog.get_logger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
+
+    db_engine = create_async_engine(settings.database_url, echo=settings.debug)
+    session_factory = async_sessionmaker(
+        db_engine,
+        class_=AsyncSession,
+        expire_on_commit=False,
+    )
+    app.state.db_engine = db_engine
+    app.state.session_factory = session_factory
+
     try:
         app.state.integration_keys = load_integration_api_keys(settings)
     except Exception:
@@ -53,6 +65,8 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         app.state.ws_hub = None
 
     yield
+
+    await db_engine.dispose()
 
     sb: ServiceBusPublisher = app.state.service_bus
     await sb.close()
