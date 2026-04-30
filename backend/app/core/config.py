@@ -22,7 +22,12 @@ class Settings(BaseSettings):
     port: int = Field(default=8000)
 
     cors_origins: list[str] = Field(
-        default=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:4200"],
+        default=[
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:4200",
+            "http://127.0.0.1:4200",
+        ],
         description="Allowed CORS origins (Angular dev server on 4200 by default).",
     )
 
@@ -38,6 +43,14 @@ class Settings(BaseSettings):
     entra_issuer: str = Field(
         default="",
         description="Override token `iss` (default: https://login.microsoftonline.com/{tenant}/v2.0)",
+    )
+
+    auth_disabled: bool = Field(
+        default=True,
+        description=(
+            "If true, skip JWT validation and use a synthetic local user. "
+            "Set AUTH_DISABLED=false in production."
+        ),
     )
 
     # Data (sync URL for Alembic; async for runtime — same SQLite file in dev)

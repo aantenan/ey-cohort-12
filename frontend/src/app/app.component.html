@@ -1,0 +1,25 @@
+@if (env.devAuthBanner) {
+  <div class="app-dev-banner">
+    <strong>Development:</strong>
+    <label for="dev-token">Paste API Bearer token</label>
+    <input
+      id="dev-token"
+      type="password"
+      autocomplete="off"
+      placeholder="eyJ…"
+      [(ngModel)]="tokenDraft"
+      (blur)="persistToken()"
+    />
+    <span class="app-dev-banner__hint">Stored in sessionStorage as kb_access_token.</span>
+  </div>
+}
+
+<nav class="app-nav">
+  <a routerLink="/kb">Knowledge base</a>
+  <a routerLink="/kb/chat-demo">Chat demo</a>
+  <a routerLink="/kb/editor">Admin editor</a>
+</nav>
+
+<main class="app-main">
+  <router-outlet />
+</main>

@@ -1,0 +1,246 @@
+.kb-editor {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.kb-editor__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.kb-editor__link {
+  font-size: 0.9rem;
+}
+
+.kb-editor__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.kb-editor__tab {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.kb-editor__tab--active {
+  border-color: #0b57d0;
+  background: #e8f0fe;
+  color: #0b57d0;
+  font-weight: 600;
+}
+
+.kb-editor__new {
+  margin-left: auto;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #1b5e20;
+  background: #e8f5e9;
+  cursor: pointer;
+  font: inherit;
+}
+
+.kb-editor__layout {
+  display: grid;
+  grid-template-columns: minmax(14rem, 22rem) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .kb-editor__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kb-editor__list {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  max-height: 70vh;
+  overflow: auto;
+  background: #fafafa;
+}
+
+.kb-editor__row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  border-bottom: 1px solid #eee;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.kb-editor__row:hover {
+  background: #f0f0f0;
+}
+
+.kb-editor__row--active {
+  background: #e8f0fe;
+}
+
+.kb-editor__row-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #111;
+}
+
+.kb-editor__row-meta {
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.kb-editor__pill {
+  display: inline-block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.kb-editor__pill--draft {
+  background: #fff3e0;
+  color: #e65100;
+}
+.kb-editor__pill--published {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.kb-editor__pill--archived {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+.kb-editor__fb {
+  font-size: 0.72rem;
+}
+
+.kb-editor__hint {
+  color: #666;
+}
+
+.kb-editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.kb-editor__toolbar select {
+  margin-left: 0.35rem;
+  padding: 0.25rem;
+}
+
+.kb-editor__status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.kb-editor__status-actions button {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.kb-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.kb-editor__field input[type='text'] {
+  font-weight: 400;
+  padding: 0.4rem 0.5rem;
+}
+
+.kb-editor__split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .kb-editor__split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kb-editor__field--grow textarea {
+  width: 100%;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.kb-editor__preview {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.75rem;
+  min-height: 20rem;
+  background: #fff;
+  overflow: auto;
+}
+
+.kb-editor__preview-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.kb-editor__savebar {
+  margin-top: 0.75rem;
+}
+
+.kb-editor__save {
+  padding: 0.5rem 1.25rem;
+  background: #0b57d0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.kb-editor__save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.kb-editor__err {
+  color: #b00020;
+}
+
+:host ::ng-deep .markdown-body pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 0.75rem;
+  border-radius: 6px;
+  overflow: auto;
+}

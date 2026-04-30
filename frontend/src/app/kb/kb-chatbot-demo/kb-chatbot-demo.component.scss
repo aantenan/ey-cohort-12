@@ -1,0 +1,35 @@
+.chat-demo {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+}
+
+.chat-demo h2 {
+  margin-top: 0;
+}
+
+.chat-demo__hint {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.chat-demo__article {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.chat-demo__article h3 {
+  margin-top: 0;
+}
+
+:host ::ng-deep .markdown-body pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 0.75rem;
+  border-radius: 6px;
+  overflow: auto;
+}

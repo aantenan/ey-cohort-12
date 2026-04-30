@@ -1,0 +1,125 @@
+.kb-portal {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.kb-portal__header h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+}
+
+.kb-portal__sub {
+  margin: 0 0 1rem;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.kb-portal__detail {
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.kb-portal__back {
+  background: none;
+  border: none;
+  color: #0b57d0;
+  cursor: pointer;
+  font: inherit;
+  padding: 0 0 1rem;
+}
+
+.kb-portal__title {
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+}
+
+.kb-portal__body {
+  line-height: 1.6;
+  color: #222;
+}
+
+.kb-portal__feedback {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kb-portal__feedback-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.kb-portal__feedback-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.kb-portal__feedback-actions button {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  cursor: pointer;
+  font: inherit;
+}
+
+.kb-portal__feedback-actions button:hover {
+  background: #f0f0f0;
+}
+
+.kb-portal__thanks {
+  color: #1b5e20;
+  font-size: 0.95rem;
+}
+
+.kb-portal__err {
+  color: #b00020;
+}
+
+.kb-portal__browse {
+  margin-top: 1rem;
+}
+
+.kb-portal__category {
+  margin-bottom: 1.75rem;
+}
+
+.kb-portal__cat-title {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+  color: #333;
+}
+
+.kb-portal__category ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.kb-portal__category a {
+  color: #0b57d0;
+  text-decoration: none;
+}
+
+.kb-portal__category a:hover {
+  text-decoration: underline;
+}
+
+/* ngx-markdown code blocks */
+:host ::ng-deep .markdown-body pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+:host ::ng-deep .markdown-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+}

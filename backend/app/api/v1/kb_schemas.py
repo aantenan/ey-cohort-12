@@ -36,3 +36,33 @@ class KBArticlePatch(BaseModel):
 class KBFeedbackCreate(BaseModel):
     was_helpful: bool
     chat_session_id: UUID | None = None
+
+
+class KBSearchHit(BaseModel):
+    article_id: UUID
+    title: str
+    snippet: str
+    category: str | None = None
+    published_at: datetime | None = None
+    rank: float
+
+
+class KBSearchResponse(BaseModel):
+    data: list[KBSearchHit]
+    total: int
+    limit: int
+    offset: int
+
+
+class CategoryRead(BaseModel):
+    id: UUID
+    name: str
+
+    model_config = {"from_attributes": True}
+
+
+class KBArticleAdminRead(KBArticleRead):
+    """Article row for KB staff admin list (includes aggregate feedback)."""
+
+    feedback_count: int = 0
+    helpful_percent: float | None = None

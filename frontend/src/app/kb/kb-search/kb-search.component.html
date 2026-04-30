@@ -1,0 +1,50 @@
+<section class="kb-search" [class.kb-search--chatbot]="variant() === 'chatbot'">
+  <label class="kb-search__label" for="kb-q">Search the knowledge base</label>
+  <input
+    id="kb-q"
+    name="kbSearchQuery"
+    type="search"
+    class="kb-search__input"
+    placeholder="Type to search…"
+    dir="ltr"
+    autocomplete="off"
+    spellcheck="false"
+    [(ngModel)]="query"
+    (ngModelChange)="onQueryChange($event)"
+  />
+
+  @if (error) {
+    <p class="kb-search__error" role="alert">{{ error }}</p>
+  }
+
+  @if (easterEgg) {
+    <p class="kb-search__easter">All your base are belong to us.</p>
+  } @else if (loading) {
+    <p class="kb-search__status">Searching…</p>
+  } @else if (searched && !loading && total === 0 && query.trim().length > 0) {
+    <div class="kb-search__empty">
+      <p>No articles found.</p>
+      <p>
+        <a [href]="ticketSubmitUrl" target="_blank" rel="noopener">Submit a support ticket</a>
+        and we will help you find an answer.
+      </p>
+    </div>
+  } @else if (hits.length) {
+    <ul class="kb-search__results" role="list">
+      @for (hit of hits; track trackById($index, hit)) {
+        <li>
+          <button type="button" class="kb-search__card" (click)="selectHit(hit)">
+            <span class="kb-search__title">{{ hit.title }}</span>
+            @if (hit.category) {
+              <span class="kb-search__badge">{{ hit.category }}</span>
+            }
+            <span
+              class="kb-search__snippet"
+              [innerHTML]="snippetHtml(hit.snippet)"
+            ></span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>

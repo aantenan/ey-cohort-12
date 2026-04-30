@@ -1,0 +1,50 @@
+.app-dev-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  background: #fff8e1;
+  border-bottom: 1px solid #ffe082;
+  font-size: 0.85rem;
+}
+
+.app-dev-banner label {
+  margin-right: 0.35rem;
+}
+
+.app-dev-banner input {
+  flex: 1;
+  min-width: 12rem;
+  max-width: 36rem;
+  padding: 0.35rem 0.5rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.app-dev-banner__hint {
+  color: #555;
+  font-size: 0.78rem;
+}
+
+.app-nav {
+  display: flex;
+  gap: 1rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fafafa;
+}
+
+.app-nav a {
+  color: #0b57d0;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.app-nav a:hover {
+  text-decoration: underline;
+}
+
+.app-main {
+  min-height: calc(100vh - 6rem);
+}

@@ -219,3 +219,7 @@ __marimo__/
 
 # Backend: local SQLite (dev / Alembic)
 backend/*.db
+
+# Frontend (Angular / npm)
+frontend/node_modules/
+frontend/.angular/

@@ -1,0 +1,54 @@
+<div class="kb-portal">
+  <header class="kb-portal__header">
+    <h1>Knowledge base</h1>
+    <p class="kb-portal__sub">Browse published articles or search across all topics.</p>
+  </header>
+
+  <app-kb-search (articleSelected)="onSearchSelect($event)" />
+
+  @if (activeArticleId) {
+    <article class="kb-portal__detail">
+      <button type="button" class="kb-portal__back" (click)="backToList()">← Back to topics</button>
+      @if (loadingArticle) {
+        <p class="kb-portal__loading">Loading article…</p>
+      } @else if (loadError) {
+        <p class="kb-portal__err" role="alert">{{ loadError }}</p>
+      } @else if (article) {
+        <h2 class="kb-portal__title">{{ article.title }}</h2>
+        <div class="kb-portal__body markdown-body">
+          <markdown [data]="article.content" />
+        </div>
+        <section class="kb-portal__feedback" aria-label="Article feedback">
+          <span class="kb-portal__feedback-label">Was this helpful?</span>
+          @if (feedbackThanks) {
+            <span class="kb-portal__thanks">Thanks for your feedback.</span>
+          } @else {
+            <div class="kb-portal__feedback-actions">
+              <button type="button" (click)="vote(true)" title="Helpful">👍 Yes</button>
+              <button type="button" (click)="vote(false)" title="Not helpful">👎 No</button>
+            </div>
+          }
+        </section>
+      }
+    </article>
+  } @else {
+    @if (indexError) {
+      <p class="kb-portal__err" role="alert">{{ indexError }}</p>
+    } @else {
+      <div class="kb-portal__browse">
+        @for (g of groups; track g.category.id || 'unc') {
+          <section class="kb-portal__category">
+            <h2 class="kb-portal__cat-title">{{ g.category.name }}</h2>
+            <ul>
+              @for (a of g.articles; track a.id) {
+                <li>
+                  <a [routerLink]="['/kb/article', a.id]">{{ a.title }}</a>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+      </div>
+    }
+  }
+</div>

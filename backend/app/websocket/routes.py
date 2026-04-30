@@ -18,14 +18,15 @@ async def agent_queue_ws(
     token: str | None = Query(None, description="Entra ID access token (same validation as HTTP)"),
 ) -> None:
     settings = get_settings()
-    if not token:
-        await websocket.close(code=4001, reason="missing_token")
-        return
-    try:
-        validate_access_token(token, settings)
-    except StarletteHTTPException:
-        await websocket.close(code=4001, reason="invalid_token")
-        return
+    if not settings.auth_disabled:
+        if not token:
+            await websocket.close(code=4001, reason="missing_token")
+            return
+        try:
+            validate_access_token(token, settings)
+        except StarletteHTTPException:
+            await websocket.close(code=4001, reason="invalid_token")
+            return
 
     hub = getattr(websocket.app.state, "ws_hub", None)
     if hub is None:

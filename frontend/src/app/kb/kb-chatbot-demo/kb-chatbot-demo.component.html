@@ -1,0 +1,15 @@
+<section class="chat-demo">
+  <h2>Self-service chatbot (demo)</h2>
+  <p class="chat-demo__hint">
+    Search is embedded inline. Choosing a result renders the article here (WO-28 chatbot mode).
+  </p>
+  <app-kb-search variant="chatbot" (articleSelected)="onSelectArticle($event)" />
+  @if (article(); as art) {
+    <article class="chat-demo__article">
+      <h3>{{ art.title }}</h3>
+      <div class="markdown-body">
+        <markdown [data]="art.content" />
+      </div>
+    </article>
+  }
+</section>

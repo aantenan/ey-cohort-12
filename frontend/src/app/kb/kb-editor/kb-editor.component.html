@@ -1,0 +1,100 @@
+<div class="kb-editor">
+  <header class="kb-editor__head">
+    <h1>Knowledge base — admin</h1>
+    <a routerLink="/kb" class="kb-editor__link">← Public portal</a>
+  </header>
+
+  @if (listError) {
+    <p class="kb-editor__err">{{ listError }}</p>
+  }
+
+  <nav class="kb-editor__tabs" aria-label="Article status">
+    @for (t of tabs; track t.id) {
+      <button
+        type="button"
+        class="kb-editor__tab"
+        [class.kb-editor__tab--active]="statusTab === t.id"
+        (click)="selectTab(t.id)"
+      >
+        {{ t.label }}
+      </button>
+    }
+    <button type="button" class="kb-editor__new" (click)="newArticle()" [disabled]="saving">
+      + New draft
+    </button>
+  </nav>
+
+  <div class="kb-editor__layout">
+    <aside class="kb-editor__list" aria-label="Articles">
+      @for (r of rows; track r.id) {
+        <button
+          type="button"
+          class="kb-editor__row"
+          [class.kb-editor__row--active]="selected?.id === r.id"
+          (click)="selectRow(r)"
+        >
+          <span class="kb-editor__row-title">{{ r.title }}</span>
+          <span class="kb-editor__row-meta">
+            <span class="kb-editor__pill kb-editor__pill--{{ r.status }}">{{ r.status }}</span>
+            @if (r.feedback_count > 0) {
+              <span class="kb-editor__fb">
+                Feedback {{ r.feedback_count }} ·
+                {{ r.helpful_percent != null ? (r.helpful_percent | number: '1.0-1') + '% helpful' : '—' }}
+              </span>
+            } @else {
+              <span class="kb-editor__fb">No feedback yet</span>
+            }
+          </span>
+        </button>
+      }
+    </aside>
+
+    <main class="kb-editor__main">
+      @if (!selected) {
+        <p class="kb-editor__hint">Select an article or create a new draft.</p>
+      } @else {
+        @if (saveError) {
+          <p class="kb-editor__err">{{ saveError }}</p>
+        }
+        <div class="kb-editor__toolbar">
+          <label>
+            Category
+            <select [(ngModel)]="editCategoryId">
+              <option [ngValue]="null">— None —</option>
+              @for (c of categories; track c.id) {
+                <option [ngValue]="c.id">{{ c.name }}</option>
+              }
+            </select>
+          </label>
+          <div class="kb-editor__status-actions">
+            <button type="button" (click)="setStatus('published')" [disabled]="saving">Publish</button>
+            <button type="button" (click)="setStatus('archived')" [disabled]="saving">Archive</button>
+            <button type="button" (click)="setStatus('draft')" [disabled]="saving">Mark draft</button>
+          </div>
+        </div>
+
+        <label class="kb-editor__field">
+          Title
+          <input type="text" [(ngModel)]="editTitle" maxlength="500" />
+        </label>
+
+        <div class="kb-editor__split">
+          <label class="kb-editor__field kb-editor__field--grow">
+            Markdown
+            <textarea [(ngModel)]="editContent" rows="22"></textarea>
+          </label>
+          <div class="kb-editor__preview markdown-body">
+            <span class="kb-editor__preview-label">Preview</span>
+            <markdown [data]="editContent" />
+          </div>
+        </div>
+
+        <div class="kb-editor__savebar">
+          <button type="button" class="kb-editor__save" (click)="saveEdits()" [disabled]="saving">
+            Save changes
+          </button>
+        </div>
+      }
+    </main>
+  </div>
+</div>
